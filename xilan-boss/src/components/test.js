@@ -1,5 +1,6 @@
 import React from "react";
-
+import { List } from "antd-mobile";
+import "antd-mobile/dist/antd-mobile.css";
 export function Test(props) {
   var state = ["ppx", "clg", "xxs"];
 
@@ -8,11 +9,16 @@ export function Test(props) {
     <div>
       test1
       <h2>{props.others}</h2>
-      <ul>
+      <List renderHeader={"姓名列表"} renderFooter={"结束列表"}>
+        {state.map((item) => (
+          <List.Item key={item}>{item}</List.Item>
+        ))}
+      </List>
+      {/* <ul>
         {state.map((item) => (
           <li key={item}>{item}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
