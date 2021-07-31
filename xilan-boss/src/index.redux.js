@@ -5,7 +5,7 @@ const ADD_COUNTER = "add";
 const OUT_COUNTER = "out";
 
 // 3 这是一个reducer函数接受 state action
-export function counter(state = 0, action) {
+export function counter(state = 10, action) {
   switch (action.type) {
     case ADD_COUNTER:
       return state + 1;
@@ -14,7 +14,7 @@ export function counter(state = 0, action) {
       return state - 1;
       break;
     default:
-      return 10;
+      return state;
   }
 }
 

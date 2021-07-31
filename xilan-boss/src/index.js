@@ -1,18 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { counter, add, out, addAsync } from "./index.redux";
+import { connect, Provider } from "react-redux";
+import { BrowserRouter, Route, Link, Redirect, Switch } from "react-router-dom";
+import rootReducer from "./reducer";
+import Auth from "./Auth";
+import Dashboard from "./Dashboard";
 
-const store = createStore(counter, applyMiddleware(thunk));
-function render() {
-  ReactDOM.render(
-    <App store={store} add={add} out={out} addAsync={addAsync} />,
-    document.getElementById("root")
-  );
-}
-render();
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : () => {}
+  )
+);
+console.log(store.getState());
 
-//订阅render 每次修改 重写渲染
-store.subscribe(render);
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/login" component={Auth}></Route>
+        <Route path="/dashboard" component={Dashboard}></Route>
+        <Redirect to="/dashboard"></Redirect>
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
+);
