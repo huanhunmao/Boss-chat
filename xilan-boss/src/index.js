@@ -5,9 +5,11 @@ import thunk from "redux-thunk";
 import { connect, Provider } from "react-redux";
 import { BrowserRouter, Route, Link, Redirect, Switch } from "react-router-dom";
 import rootReducer from "./reducer";
-import Auth from "./Auth";
-import Dashboard from "./Dashboard";
-
+import "./config";
+import "antd-mobile/dist/antd-mobile.css";
+import Login from "./container/Login/login";
+import Register from "./container/Register/register";
+import AuthRoute from "./component/authroute/authroute";
 const store = createStore(
   rootReducer,
   compose(
@@ -15,16 +17,16 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : () => {}
   )
 );
-console.log(store.getState());
+// console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route path="/login" component={Auth}></Route>
-        <Route path="/dashboard" component={Dashboard}></Route>
-        <Redirect to="/dashboard"></Redirect>
-      </Switch>
+      <div>
+        <AuthRoute></AuthRoute>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/register" component={Register}></Route>
+      </div>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

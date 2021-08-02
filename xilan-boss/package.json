@@ -12,6 +12,7 @@
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "antd-mobile": "^2.3.4",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.0",
     "babel-loader": "8.1.0",
@@ -20,6 +21,7 @@
     "bfj": "^7.0.2",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "cookie-parser": "^1.4.5",
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -153,9 +155,26 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      [
+        "import",
+        {
+          "libraryName" : "antd-mobile",
+          "style" : "css"
+        }
+      ]
     ]
   },
+  "proxy": "http://localhost:9000/",
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
     "babel-plugin-import": "^1.13.3",
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.1.8"
